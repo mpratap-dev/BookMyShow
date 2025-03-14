@@ -2,7 +2,8 @@ import React from "react";
 import type { FormProps } from "antd";
 import { Button, Col, Form, Input, Row, Typography } from "antd";
 import Title from "antd/es/typography/Title";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../services/auth";
 
 type FieldType = {
   name?: string;
@@ -11,15 +12,26 @@ type FieldType = {
   remember?: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
+
 
 const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
 
-const Register: React.FC = () => (
+const Register: React.FC = () => {
+  const navigate = useNavigate();
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    try {
+      const response = await register(values);
+
+      if(response.success) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  return (
   <Row className="h-screen" justify="center" align="middle">
     <Col span={6}>
       <Title className="text-center mb-2" level={3}>
@@ -67,6 +79,6 @@ const Register: React.FC = () => (
       </Typography.Text>
     </Col>
   </Row>
-);
+)};
 
 export default Register;

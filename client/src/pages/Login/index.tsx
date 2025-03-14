@@ -4,6 +4,8 @@ import { Button, Col, Form, Input, Row, Typography } from "antd";
 import Title from "antd/es/typography/Title";
 import { Link, useNavigate } from "react-router-dom";
 import { login, LoginBody } from "../../services/auth";
+import { setUserData } from "../../store/slices/users";
+import { useDispatch } from "react-redux";
 
 type FieldType = {
   email?: string;
@@ -12,20 +14,27 @@ type FieldType = {
 
 const Login: React.FC = () => {  
   const navigate = useNavigate();
+  const dispatch = useDispatch(); 
   const [error, setError] = useState("");
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values: LoginBody) => {
     try {
       const response = await login(values);
-      if(response.success) {
-        navigate("/");
+      if(!response.success) {
+        return setError(response.message);
       }
+
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      
+      dispatch(setUserData(response.data));
+
+      navigate("/");
     } catch (error) {
       const err = error as { response: { data: { message: string } } };
       setError(err.response.data.message);
     }
   };
-  
 
   return (
     <Row className="h-screen" justify="center" align="middle">
@@ -36,7 +45,6 @@ const Login: React.FC = () => {
         <Form
           name="basic"
           onFinish={onFinish}
-          // onFinishFailed={onFinishFailed}
           autoComplete="off"
           layout="vertical"
         >
