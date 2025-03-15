@@ -15,9 +15,7 @@ const AppContent = () => {
   } = theme.useToken();
   const user = useAppSelector((state) => state.user.user);
   
-  const redirectAsPerRole = (role: `${ROLES}`) => {
-    console.log({role});
-    
+  const redirectAsPerRole = (role: `${ROLES}`) => {    
     switch (role) {
       case ROLES.ADMIN: {
         navigate(ADMIN_MOVIES_PAGE_URL);

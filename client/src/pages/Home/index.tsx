@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setUserData } from "../../store/slices/users";
+import { sidebarRoutes } from "../../routes";
 
 const {Title} = Typography;
 
@@ -20,7 +21,6 @@ const Home = () => {
     navigate("/login");
     return null;
   };
-
   return (
     <Title className="text-center mt-4" level={3}>
       Welcome, {userData?.name}!

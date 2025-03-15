@@ -6,8 +6,21 @@ export const addMovie = async (req, res) => {
     res.status(201).json({
       success: true,
       data: movie,
-      token,
-      message: "Login successful"
+      message: "Movie added successfully"
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+
+export const deleteMovie = async (req, res) => {
+  try {
+    const movie = await MovieModel.findByIdAndDelete(req.params.id);
+    
+    res.status(200).json({
+      success: true,
+      data: movie,
+      message: "Movie deleted successfully"
     });
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -26,5 +39,18 @@ export const getAllMovies = async (req, res) => {
       message: error.message,
       success: false
     });
+  }
+}
+
+export const updateMovie = async (req, res) => {
+  try {
+    const movie = await MovieModel.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({
+      success: true,
+      data: movie,
+      message: "Movie updated successfully"
+    });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 }

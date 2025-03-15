@@ -11,6 +11,7 @@ export type Route = {
   sidebar?: {
     label: string;
     icon: React.ReactNode;
+    url?: string;
   };
 };
 
@@ -20,7 +21,9 @@ export const sidebarRoutes = (routes
   .filter((route) => route.sidebar)
   .map((route) => ({
     ...route.sidebar,
-    key: route.url,
+    key: route.sidebar ? (route.sidebar?.url || route.url) : route.url,
   })) || []) as ItemType<MenuItemType>[];
+
+  
 
 export default routes;

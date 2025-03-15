@@ -20,15 +20,11 @@ const movieSchema = new mongoose.Schema({
     default: "action"
   },
   language: {
-    type: String,
+    type: [String],
     required: true
   },
   releaseDate: {
     type: Date,
-    required: true
-  },
-  rating: {
-    type: Number,
     required: true
   },
   poster: {

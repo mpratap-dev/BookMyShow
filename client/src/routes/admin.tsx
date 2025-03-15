@@ -13,6 +13,13 @@ export const ADMIN_THEATER_PAGE_URL = `${ADMIN_BASE_URL}/theater`;
 
 const adminRoutes: Route[] = [
   {
+    url: `${ADMIN_MOVIES_PAGE_URL}/:id`,
+    component: Movies,
+    exact: true,
+    private: true,
+    roles: [ROLES.ADMIN]
+  },
+  {
     url: ADMIN_MOVIES_PAGE_URL,
     component: Movies,
     exact: true,
@@ -20,7 +27,7 @@ const adminRoutes: Route[] = [
     roles: [ROLES.ADMIN],
     sidebar: {
       label: "Movies",
-      icon: <FundProjectionScreenOutlined/>,
+      icon: <VideoCameraOutlined/>,
     }
   },
   {
@@ -31,7 +38,7 @@ const adminRoutes: Route[] = [
     roles: [ROLES.ADMIN],
     sidebar: {
       label: "Theater",
-      icon: <VideoCameraOutlined/>,
+      icon: <FundProjectionScreenOutlined/>,
     }
   }
 ];
