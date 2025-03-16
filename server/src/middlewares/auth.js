@@ -56,10 +56,12 @@ export const verifyIfSameUser = async (req, res, next) => {
   }
 }
 
+
+
 export const checkAdminRole = async (req, res, next) => {
   try {
     const role = req.role;
-    if(role !== "admin") {
+    if(role !== ROLES.ADMIN) {
       return res.status(403).json({
         success: false,
         message: "You are not authorized to access this resource"
@@ -73,3 +75,23 @@ export const checkAdminRole = async (req, res, next) => {
     });
   }
 }
+
+export const checkValidRole = (roles = [ROLES.ADMIN]) => {
+  return async (req, res, next) => {
+    try {
+      const role = req.role;
+      if (!roles.includes(role)) {
+        return res.status(403).json({
+          success: false,
+          message: "You are not authorized to access this resource"
+        });
+      }
+      next();
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error.message
+      });
+    }
+  };
+};

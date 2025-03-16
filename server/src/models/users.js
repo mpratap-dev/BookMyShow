@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from 'url';
+import { ROLES } from "../constants/auth.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const filenameWithoutExt = path.parse(__filename).name;
@@ -21,9 +22,8 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["user", "admin", "partner"],
+    enum: [ROLES.ADMIN, ROLES.PARTNER],
     require: true,
-    default: "user",
   }
 });
 

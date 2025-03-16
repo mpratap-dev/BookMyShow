@@ -5,6 +5,7 @@ import {
   MenuUnfoldOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
+import { logout } from "../services/auth";
 
 const { Header } = Layout;
 
@@ -17,12 +18,6 @@ const AppHeader = ({ setCollapsed, collapsed }: Props) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
-  const logoutUser = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    window.location.href = "/login";
-  };
 
   return (
     <Header
@@ -46,7 +41,7 @@ const AppHeader = ({ setCollapsed, collapsed }: Props) => {
       <Button
         type="text"
         icon={<LogoutOutlined />}
-        onClick={logoutUser}
+        onClick={logout}
         style={{
           fontSize: "16px",
           width: 64,

@@ -1,12 +1,13 @@
 import express from "express";
 import { addMovie, deleteMovie, getAllMovies, updateMovie } from "../controllers/movies.js";
-import { checkAdminRole, verifyToken } from "../middlewares/auth.js";
+import { checkValidRole, verifyToken } from "../middlewares/auth.js";
+import { ROLES } from "../constants/auth.js";
 
 const movieRouter = express.Router();
 
-movieRouter.post("/", verifyToken, checkAdminRole, addMovie);
-movieRouter.get("/", verifyToken, checkAdminRole, getAllMovies);
-movieRouter.delete("/:id", verifyToken, checkAdminRole, deleteMovie);
-movieRouter.patch("/:id", verifyToken, checkAdminRole, updateMovie);
+movieRouter.post("/", verifyToken, checkValidRole([ROLES.ADMIN]), addMovie);
+movieRouter.get("/", verifyToken, checkValidRole([ROLES.ADMIN]), getAllMovies);
+movieRouter.delete("/:id", verifyToken, checkValidRole([ROLES.ADMIN]), deleteMovie);
+movieRouter.put("/:id", verifyToken, checkValidRole([ROLES.ADMIN]), updateMovie);
 
 export default movieRouter;

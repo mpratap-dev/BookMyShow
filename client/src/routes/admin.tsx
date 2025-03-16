@@ -5,11 +5,11 @@ import {
   FundProjectionScreenOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import Theater from "../pages/Admin/Theaters";
+import Theater from "../pages/Shared/Theaters";
 
-export const ADMIN_BASE_URL = "admin";
+export const ADMIN_BASE_URL = "/admin";
 export const ADMIN_MOVIES_PAGE_URL = `${ADMIN_BASE_URL}/movies`;
-export const ADMIN_THEATER_PAGE_URL = `${ADMIN_BASE_URL}/theater`;
+export const ADMIN_THEATER_PAGE_URL = `${ADMIN_BASE_URL}/theaters`;
 
 const adminRoutes: Route[] = [
   {

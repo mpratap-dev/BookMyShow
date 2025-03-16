@@ -22,7 +22,7 @@ export const addMovies = async (params: { [key:string]: string | number }) => {
 
 export const updateMovies = async (id: string, params: { [key:string]: string | number }) => {
   try {
-    const response = await axiosHttp.patch(`/movies/${id}`, params);
+    const response = await axiosHttp.put(`/movies/${id}`, params);
     return response.data;
   } catch (error) {
     console.error(error);
