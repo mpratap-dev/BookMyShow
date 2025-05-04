@@ -9,6 +9,7 @@ import Dashboard from "./layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import AppContent from "./layout/Content";
+import { HOME_PAGE_URL, LOGIN_PAGE_URL, REGISTER_PAGE_URL } from "./routes/URL";
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
+            <Route path={HOME_PAGE_URL} element={<Home/>}/>
             <Route
-              path="*"
+              path="/"
               element={
                 <ProtectedRoute>
                   <Dashboard />
@@ -26,8 +28,8 @@ function App() {
             >
               <Route path="*" element={<AppContent />} />  
             </Route>
-            <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-            <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+            <Route path={LOGIN_PAGE_URL} element={<PublicRoute><Login /></PublicRoute>} />
+            <Route path={REGISTER_PAGE_URL} element={<PublicRoute><Register /></PublicRoute>} />
           </Routes>
         </BrowserRouter>
       </Provider>

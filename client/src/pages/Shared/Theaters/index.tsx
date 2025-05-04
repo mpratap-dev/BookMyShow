@@ -4,20 +4,23 @@ import { Form } from "antd";
 import { useNavigate } from "react-router-dom";
 import { getAllTheaters } from "../../../services/theaters";
 import AddTheater from "./AddTheater";
-import { PARTNER_THEATER_PAGE_URL } from "../../../routes/partner";
+import { PARTNER } from "../../../routes/URL";
+import { getCurrentRole } from "../../../utils/users";
+import { ROLES } from "../../../constants/auth";
 
 const Theaters = () => {
   const [theaters, setTheaters] = useState([]);
   const [isFormModalOpen, setFormModalOpenOpen] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const role = getCurrentRole();
 
   const showDrawer = () => setFormModalOpenOpen(true);
   const closeDrawer = () => {
-    navigate(`/${PARTNER_THEATER_PAGE_URL}`);
+    navigate(PARTNER.THEATERS);
     form.resetFields();
     setFormModalOpenOpen(false);
-  }
+  };
 
   const fetchTheaters = async () => {
     try {
@@ -34,13 +37,15 @@ const Theaters = () => {
 
   return (
     <>
-      <AddTheater
-        isFormModalOpen={isFormModalOpen}
-        showDrawer={showDrawer}
-        closeDrawer={closeDrawer}
-        form={form}
-        fetchTheaters={fetchTheaters}
-      />
+      {role === ROLES.PARTNER && (
+        <AddTheater
+          isFormModalOpen={isFormModalOpen}
+          showDrawer={showDrawer}
+          closeDrawer={closeDrawer}
+          form={form}
+          fetchTheaters={fetchTheaters}
+        />
+      )}
       <TheaterListing
         showDrawer={showDrawer}
         theaters={theaters}

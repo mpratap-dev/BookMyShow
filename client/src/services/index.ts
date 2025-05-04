@@ -1,5 +1,6 @@
 import axios, { AxiosRequestHeaders } from "axios";
 import { logout } from "./auth";
+import { LOGIN_PAGE_URL } from "../routes/URL";
 
 const axiosHttp = axios.create({
   baseURL: `/api/`,
@@ -34,7 +35,6 @@ axiosHttp.interceptors.response.use(
       // localStorage.removeItem("persist:root");
       // removeLocalStorageToken
       logout();
-      window.location.href = "/login";
     }
     return Promise.reject(error);
   }

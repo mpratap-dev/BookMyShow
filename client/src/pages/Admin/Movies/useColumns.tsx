@@ -65,7 +65,7 @@ const useColumns = ({ handleDeleteMovie, form, showDrawer }: Props) => {
                 releaseDate: dayjs(records.releaseDate),
               }
               console.log(processedFormData);
-              navigate(`/${ADMIN_MOVIES_PAGE_URL}/${_id}`);
+              navigate(`${ADMIN_MOVIES_PAGE_URL}/${_id}`);
               form.setFieldsValue(processedFormData);
               showDrawer();
             }}

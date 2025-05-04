@@ -1,12 +1,13 @@
 import { Layout, Menu } from "antd";
-import { sidebarRoutes } from "../routes";
 import LogoSmall from "../assets/logo-sm.svg";
-import MenuItem from "antd/es/menu/MenuItem";
 import { useNavigate } from "react-router-dom";
+import useSidebarMenuItems from "../hooks/useSidebarMenuItems";
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
   const navigate = useNavigate();
+  const { sideBarMenuItems } = useSidebarMenuItems();
+  
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div
@@ -33,8 +34,8 @@ const Sidebar = ({ collapsed }: { collapsed: boolean }) => {
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={[sidebarRoutes[0]?.key as string]}
-        items={sidebarRoutes}
+        defaultSelectedKeys={[sideBarMenuItems[0]?.key as string]}
+        items={sideBarMenuItems}
         onClick={({key}) => {
           navigate(key);
         }}

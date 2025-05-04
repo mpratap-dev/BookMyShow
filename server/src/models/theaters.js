@@ -18,6 +18,10 @@ const theaterSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  createdBy: {
+    type: String,
+    required: true
+  },
   status: {
     type: String,
     enum: [STATUS.APPROVED, STATUS.PENDING, STATUS.REJECTED],

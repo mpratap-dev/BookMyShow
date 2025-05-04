@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login, LoginBody } from "../../services/auth";
 import { setUserData } from "../../store/slices/users";
 import { useDispatch } from "react-redux";
+import { HOME_PAGE_URL, REGISTER_PAGE_URL } from "../../routes/URL";
 
 type FieldType = {
   email?: string;
@@ -29,7 +30,7 @@ const Login: React.FC = () => {
       
       dispatch(setUserData(response.data));
 
-      navigate("/");
+      navigate(HOME_PAGE_URL);
     } catch (error) {
       const err = error as { response: { data: { message: string } } };
       setError(err.response.data.message);
@@ -72,7 +73,7 @@ const Login: React.FC = () => {
           </Form.Item>
         </Form>
         <Typography.Text>
-          New User? <Link to="/register">Register</Link>
+          New User? <Link to={REGISTER_PAGE_URL}>Register</Link>
         </Typography.Text>
       </Col>
     </Row>

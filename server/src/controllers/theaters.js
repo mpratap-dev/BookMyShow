@@ -1,9 +1,21 @@
+import { ROLES } from "../constants/auth.js";
 import { STATUS } from "../constants/theaters.js";
 import TheaterModel from "../models/theaters.js";
 
 export const addTheater = async (req, res) => {
   try {
-    const theater = await TheaterModel.create(req.body);
+    const isExistingTheater = await TheaterModel.findOne({ email: req.body.email });
+    if (isExistingTheater) {
+      return res.status(400).json({
+        success: false,
+        message: "Theater already exists",
+      });
+    }
+    const body = {
+      ...req.body,
+      createdBy: req.email,
+    }
+    const theater = await TheaterModel.create(body);
     res.status(201).json({
       success: true,
       data: theater,
@@ -30,7 +42,12 @@ export const deleteTheater = async (req, res) => {
 
 export const getAllTheaters = async (req, res) => {
   try {
-    const data = await TheaterModel.find({});
+    const role = req.role;
+    const IS_ADMIN = role === ROLES.ADMIN;
+    const email = req.email;
+    console.log(email);
+    
+    const data = await TheaterModel.find(IS_ADMIN ? {} : { createdBy: email });
     res.status(200).json({
       data,
       success: true,

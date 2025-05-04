@@ -14,7 +14,7 @@ const Movies = () => {
 
   const showDrawer = () => setFormModalOpenOpen(true);
   const closeDrawer = () => {
-    navigate(`/${ADMIN_MOVIES_PAGE_URL}`);
+    navigate(ADMIN_MOVIES_PAGE_URL);
     form.resetFields();
     setFormModalOpenOpen(false);
   }

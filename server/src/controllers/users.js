@@ -35,6 +35,7 @@ export const addUser = async (req, res) => {
   try {
     const body = req.body;
     const { email } = body;
+    // TODO: Encrypt password using bcrypt
     const isExistingUser = await User.findOne({ email });
     if (isExistingUser) {
       res.status(400).json({

@@ -19,7 +19,7 @@ const MoviesListing = ({ movies, fetchMovies, form, showDrawer }: ListingProps) 
     }
   };
   const columns = useColumns({ handleDeleteMovie, form, showDrawer });
-  return <Table dataSource={movies} columns={columns} />;
+  return <Table rowKey="_id" dataSource={movies} columns={columns} />;
 };
 
 export default MoviesListing;

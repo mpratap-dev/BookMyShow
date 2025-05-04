@@ -4,6 +4,7 @@ import { Button, Col, Form, Input, Radio, Row, Typography } from "antd";
 import Title from "antd/es/typography/Title";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../services/auth";
+import { LOGIN_PAGE_URL } from "../../routes/URL";
 
 type FieldType = {
   name?: string;
@@ -23,7 +24,7 @@ const Register: React.FC = () => {
       const response = await register(values);
 
       if (response.success) {
-        navigate("/login");
+        navigate(LOGIN_PAGE_URL);
       }
     } catch (error) {
       console.error(error);
@@ -78,7 +79,7 @@ const Register: React.FC = () => {
           </Form.Item>
         </Form>
         <Typography.Text>
-          Already have an account? <Link to="/login">Login</Link>
+          Already have an account? <Link to={LOGIN_PAGE_URL}>Login</Link>
         </Typography.Text>
       </Col>
     </Row>

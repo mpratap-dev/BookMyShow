@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/users.js';
+import { ROLES } from '../constants/auth.js';
 
 export const verifyToken = async (req, res, next) => {
   try {
@@ -27,6 +28,8 @@ export const verifyToken = async (req, res, next) => {
     }
 
     req.role = user.role;
+    req.email = user.email;
+    req.name = user.name;
     
     next();
   } catch (error) {
@@ -55,8 +58,6 @@ export const verifyIfSameUser = async (req, res, next) => {
     });
   }
 }
-
-
 
 export const checkAdminRole = async (req, res, next) => {
   try {

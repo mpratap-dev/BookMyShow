@@ -1,5 +1,6 @@
 import axios from "axios";
 import axiosHttp from ".";
+import { LOGIN_PAGE_URL } from "../routes/URL";
 
 export type Response = {
   success: boolean;
@@ -24,9 +25,14 @@ export const register = async (params: { [key:string]: string }) => {
 };
 
 export const logout = async () => {
-  const response = await axiosHttp.post("users/logout");
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-  window.location.href = "/login";
-  return response.data;
+  try {
+    const response = await axiosHttp.post("users/logout");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = LOGIN_PAGE_URL; 
+  }
 }

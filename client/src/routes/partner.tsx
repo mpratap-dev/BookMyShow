@@ -4,20 +4,18 @@ import {
   FundProjectionScreenOutlined,
 } from "@ant-design/icons";
 import Theater from "../pages/Shared/Theaters";
-
-export const PARTNER_BASE_URL = "/partner";
-export const PARTNER_THEATER_PAGE_URL = `${PARTNER_BASE_URL}/theaters`;
+import { PARTNER } from "./URL";
 
 const partnerRoutes: Route[] = [
   {
-    url: `${PARTNER_THEATER_PAGE_URL}/:id`,
+    url: `${PARTNER.THEATERS}/:id`,
     component: Theater,
     exact: true,
     private: true,
     roles: [ROLES.PARTNER]
   },
   {
-    url: PARTNER_THEATER_PAGE_URL,
+    url: PARTNER.THEATERS,
     component: Theater,
     exact: true,
     private: true,

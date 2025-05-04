@@ -1,10 +1,12 @@
 import { Layout, theme } from "antd";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import routes from "../routes";
+import { HOME_PAGE_URL } from "../routes/URL";
 import { useAppSelector } from "../store";
 import { useEffect } from "react";
 import { ROLES } from "../constants/auth";
 import { ADMIN_MOVIES_PAGE_URL } from "../routes/admin";
+import { PARTNER } from "../routes/URL";
+import routes from "../routes";
 
 const { Content } = Layout;
 
@@ -21,8 +23,12 @@ const AppContent = () => {
         navigate(ADMIN_MOVIES_PAGE_URL);
         break;
       }
+      case ROLES.PARTNER: {
+        navigate(PARTNER.THEATERS);
+        break;
+      }
       default: 
-        navigate("/");
+        navigate(HOME_PAGE_URL);
     }
   }
 

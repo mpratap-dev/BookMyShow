@@ -7,8 +7,8 @@ const theatersRouter = express.Router();
 
 theatersRouter.post("/", verifyToken, checkValidRole([ROLES.ADMIN, ROLES.PARTNER]), addTheater);
 theatersRouter.get("/", verifyToken, checkValidRole([ROLES.ADMIN, ROLES.PARTNER]), getAllTheaters);
-theatersRouter.delete("/:id", verifyToken, checkValidRole([ROLES.ADMIN, ROLES.PARTNER]), deleteTheater);
-theatersRouter.put("/:id", verifyToken, checkValidRole([ROLES.ADMIN, ROLES.PARTNER]), updateTheater);
+theatersRouter.delete("/:id", verifyToken, checkValidRole([ROLES.PARTNER]), deleteTheater);
+theatersRouter.put("/:id", verifyToken, checkValidRole([ROLES.PARTNER]), updateTheater);
 theatersRouter.patch("/approve/:id", verifyToken, checkValidRole([ROLES.ADMIN]), approveTheater);
 theatersRouter.patch("/reject/:id", verifyToken, checkValidRole([ROLES.ADMIN]), rejectTheater);
 
